@@ -12,7 +12,7 @@ abstract class Controller_Admin_Base extends Controller_Template {
         View::set_global('title', 'Admin panel');
         View::set_global('description', 'Admin panel');
         $this->template->styles = array('style');
-
+// hello
         $this->session = Session::instance();
 
         if(strpos(Request::initial()->uri(), 'admin/login') === FALSE) {
