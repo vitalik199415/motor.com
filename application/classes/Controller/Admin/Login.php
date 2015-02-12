@@ -9,17 +9,18 @@ class Controller_Admin_Login extends Controller_Admin_Base {
     }
 
     public function action_index() {
+        //if($this->auth->logged_in('admin') != 0) { $this->redirect('admin'); }
         $data = array();
         if ($this->session->get('ErrorArray')) {
             $data['errors'] = $this->session->get('ErrorArray');
             $this->session->delete('ErrorArray');
         }
 
-        $this->template->title = 'Login';
+        $this->template->title = 'Вход';
         $this->template->styles = array('style', 'pages/signin');
         $this->template->scripts = array('signin');
-        $this->template->navbar = View::factory('admin/loginnavbar');
-        $this->template->content = View::factory('admin/login', $data);
+        $this->template->navbar = View::factory('admin/login/loginnavbar');
+        $this->template->content = View::factory('admin/login/login', $data);
     }
 
     public function action_auth() {
@@ -45,7 +46,7 @@ class Controller_Admin_Login extends Controller_Admin_Base {
             if(isset($post['remember'])) { $rem = TRUE; } else { $rem = FALSE; }
             $this->template->content = 'auth';
 
-            $success = Auth::instance()->login($post['login'], $post['password']);
+            $success = Auth::instance()->login($post['login'], $post['password'], $rem);
             if($success) {
                 $this->template->content = 'success';
                 $this->redirect('admin');

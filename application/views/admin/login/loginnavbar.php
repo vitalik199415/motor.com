@@ -10,24 +10,24 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="index.html">
-                Bootstrap Admin Template
+            <a class="brand" href="<?=URL::base()?>admin">
+                Motor<i>.COM</i>  Admin
             </a>
 
             <div class="nav-collapse">
                 <ul class="nav pull-right">
 
                     <li class="">
-                        <a href="signup.html" class="">
+                        <a href="#" class="">
                             Don't have an account?
                         </a>
 
                     </li>
 
                     <li class="">
-                        <a href="index.html" class="">
+                        <a href="<?=URL::base()?>" class="">
                             <i class="icon-chevron-left"></i>
-                            Back to Homepage
+                            Перейти на сайт
                         </a>
 
                     </li>

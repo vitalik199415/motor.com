@@ -4,7 +4,7 @@
 
         <form action="login/auth" method="post">
 
-            <h1>Member Login</h1>
+            <h1 align="center">Вход</h1>
 
             <?php if(isset($errors)) { ?>
                 <div class="controls">
@@ -17,16 +17,16 @@
 
             <div class="login-fields">
 
-                <p>Please provide your details</p>
+                <p align="center">Укажите данные администратора для входа</p>
 
                 <div class="field">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="login" value="" placeholder="Login" class="login username-field" />
+                    <input type="text" id="username" name="login" value="" placeholder="Логин" class="login username-field" />
                 </div> <!-- /field -->
 
                 <div class="field">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
+                    <input type="password" id="password" name="password" value="" placeholder="Пароль" class="login password-field"/>
                 </div> <!-- /password -->
 
             </div> <!-- /login-fields -->
@@ -35,10 +35,10 @@
 				
 				<span class="login-checkbox">
 					<input id="Field" name="remember" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Keep me signed in</label>
+					<label class="choice" for="Field">Оставаться в системе</label>
 				</span>
 
-                <button class="button btn btn-success btn-large">Sign In</button>
+                <button class="button btn btn-success btn-large">Войти  <i class="icon-signin"></i></button>
 
             </div> <!-- .actions -->
 
@@ -53,5 +53,5 @@
 
 
 <div class="login-extra">
-    <a href="#">Reset Password</a>
+    <a href="#">Востановить пароль</a>
 </div> <!-- /login-extra -->

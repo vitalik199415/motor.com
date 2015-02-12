@@ -5,6 +5,7 @@
     <title><?php if(isset($title)) { echo $title;};?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="<?=URL::base();?>img/admin/favicon.ico" type="image/x-icon">
     <link href="<?=URL::base();?>css/admin/bootstrap.min.css" rel="stylesheet">
     <link href="<?=URL::base();?>css/admin/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
@@ -37,6 +38,23 @@
 <?php if(isset($scripts)) { foreach($scripts as $script): ?>
     <script src="<?=URL::base();?>js/admin/<?=$script;?>.js" type="text/javascript"></script>
 <?php endforeach; }?>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.mainnav li a').click(function(){
+            $(this).each(function () {    // проходим по нужным нам ссылками
+                $(this).parent().removeClass('active');
+                var location = window.location.href; // переменная с адресом страницы
+                var link = this.href;                // переменная с url ссылки
+                var result = location.match(link);  // результат возвращает объект если совпадение найдено и null при обратном
+
+                if(result != null) {                // если НЕ равно null
+                    $(this).parent().addClass('active');    // добавляем класс
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
