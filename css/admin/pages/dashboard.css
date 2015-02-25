@@ -181,7 +181,7 @@ Bootstrap Admin Template by EGrappler.com
 
 .action-table .td-actions { 
 	width: 80px; 
-	
+
 	text-align: center; 
 }
 
@@ -192,7 +192,15 @@ Bootstrap Admin Template by EGrappler.com
 	.action-table .td-actions .btn:last-child { 
 		margin-rigth: 0; 		
 	}
-	
+
+
+/*------------------------------------------------------------------
+[4. Action Button / .action-btn]
+*/
+.action-btn {
+	text-align: right;
+	width: 100%;
+}
 	
 	
 #big_stats 

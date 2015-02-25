@@ -12,7 +12,7 @@ abstract class Controller_Admin_Base extends Controller_Template {
         $this->auth = Auth::instance();
         View::set_global('title', 'Admin panel');
         View::set_global('description', 'Admin panel');
-        $this->template->styles = array('style');
+        $this->template->styles = array('pages/dashboard', 'style');
         $this->session = Session::instance();
 
         if (strpos(Request::initial()->uri(), 'admin/login') === FALSE) {
@@ -41,6 +41,10 @@ abstract class Controller_Admin_Base extends Controller_Template {
         $str .= var_dump($var);
         $str .= '</pre>';
         return $str;
+    }
+
+    public static function set_url($url) {
+        return URL::base().$url;
     }
 
 }

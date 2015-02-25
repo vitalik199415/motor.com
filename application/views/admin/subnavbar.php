@@ -2,19 +2,20 @@
     <div class="subnavbar-inner">
         <div class="container">
             <ul class="mainnav">
-                <li class="active"><a href="<?=URL::base();?>admin/main/index"><i class="icon-dashboard"></i><span>Main</span> </a> </li>
-                <li><a href="#"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-                <li><a href="#"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
-                <li><a href="#"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-                <li><a href="#"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+                <li><a href="<?=URL::set_url('admin/main');?>"><i class="icon-home"></i><span>Главная</span> </a> </li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i><span>Навигация <i class="icon-caret-down"></i></span> </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Icons</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Pricing Plans</a></li>
-                        <li><a href="#">Login</a></li>
-                        <li><a href="#">Signup</a></li>
-                        <li><a href="#">404</a></li>
+                        <li><a href="<?=URL::set_url('admin/menu');?>">Меню сайта</a></li>
+                        <li><a href="#">Категории товаров</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="icon-comment-alt"></i><span>Новости</span> </a></li>
+                <li><a href="#"><i class="icon-list-alt"></i><span>Товары</span> </a> </li>
+                <li><a href="#"><i class="icon-file"></i><span>Страницы</span> </a> </li>
+                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-wrench"></i><span>Настройка сайта <i class="icon-caret-down"></i></span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?=URL::set_url('admin/currency')?>">Валюта на сайте</a></li>
+                        <li><a href="<?=URL::set_url('admin/langs')?>">Языки сайта</a></li>
                     </ul>
                 </li>
             </ul>

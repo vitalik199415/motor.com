@@ -1,0 +1,31 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+return array(
+    ':field must contain only letters'                     => ':field повинно містити тільки літери',
+    ':field must contain only numbers, letters and dashes' => ':field повинно містити тільки літери, цифри і символ підкреслення',
+    ':field must contain only letters and numbers'         => ':field повинно містити тільки літери і цифри',
+    ':field must be a color'                               => ':field повинно бути кодом кольору',
+    ':field must be a credit card number'                  => ':field повинно бути номером кредитної карти',
+    ':field must be a date'                                => ':field повинно бути датою',
+    ':field must be a decimal with :param2 places'         => ':field повинно бути десятковим числом з :param2 кількістю цифр',
+    ':field must be a digit'                               => ':field повинно бути цілим числом',
+    ':field must be a email address'                       => ':field повинно бути електронним адресом',
+    ':field must contain a valid email domain'             => ':field повинно бути існуючим електронним адресом',
+    ':field must equal :param2'                            => ':field повинно бути ідентичним :param2',
+    ':field must be exactly :param2 characters long'       => ':field повинно бути довжиною :param2 символів',
+    ':field must be one of the available options'          => ':field повинно бути одним із параметрів',
+    ':field must be an ip address'                         => ':field повинно бути ip-адресом',
+    ':field must be the same as :param2'                   => ':field повинно дорівнювати :param2',
+    ':field must be at least :param2 characters long'      => ':field не повинно бути коротше :param2 символів',
+    ':field must not exceed :param2 characters long'       => ':field не повинно бути довше :param2 символів',
+    ':field must not be empty'                             => ':field не повинно бути порожнім',
+    ':field must be numeric'                               => ':field повинно бути числом',
+    ':field must be a phone number'                        => ':field повинно бути номером телефону',
+    ':field must be within the range of :param2 to :param3'=> ':field має знаходитися між :param2 і :param3',
+    ':field does not match the required format'            => ':field не відповідає необхідному формату',
+    ':field must be a url'                                 => ':field повинно бути URL-адресою',
+
+    'user'                                                 => 'Поле "Користувач"',
+    'email'                                                => 'Поле "Email"',
+    'message'                                              => 'Поле "Текст повідомлення"',
+);

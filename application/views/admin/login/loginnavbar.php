@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="<?=URL::base()?>admin">
+            <a class="brand" href="<?=URL::set_url('admin')?>">
                 Motor<i>.COM</i>  Admin
             </a>
 
@@ -25,7 +25,7 @@
                     </li>
 
                     <li class="">
-                        <a href="<?=URL::base()?>" class="">
+                        <a href="<?=URL::set_url()?>" class="">
                             <i class="icon-chevron-left"></i>
                             Перейти на сайт
                         </a>

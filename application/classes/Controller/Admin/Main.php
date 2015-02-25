@@ -9,7 +9,10 @@ class Controller_Admin_Main extends Controller_Admin_Base {
 	}
 
 	public function action_index() {
+		$site_conf = Kohana::$config->load('config');
 
+		$this->template->content = View::factory('admin/main');
+		$this->template->styles = array('style', 'pages/dashboard');
 	}
 
 	public function action_hash() {

@@ -5,6 +5,7 @@
     <title><?php if(isset($title)) { echo $title;};?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="<?=URL::base();?>js/admin/jquery-1.7.2.min.js"></script>
     <link rel="shortcut icon" href="<?=URL::base();?>img/admin/favicon.ico" type="image/x-icon">
     <link href="<?=URL::base();?>css/admin/bootstrap.min.css" rel="stylesheet">
     <link href="<?=URL::base();?>css/admin/bootstrap-responsive.min.css" rel="stylesheet">
@@ -29,7 +30,7 @@
 <?php if(isset($content)) { echo $content;};?>
 <?php if(isset($footer)) { echo $footer;};?>
 
-<script src="<?=URL::base();?>js/admin/jquery-1.7.2.min.js"></script>
+
 <script src="<?=URL::base();?>js/admin/excanvas.min.js"></script>
 <script src="<?=URL::base();?>js/admin/chart.min.js" type="text/javascript"></script>
 <script src="<?=URL::base();?>js/admin/bootstrap.js"></script>
@@ -40,19 +41,46 @@
 <?php endforeach; }?>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('.mainnav li a').click(function(){
-            $(this).each(function () {    // проходим по нужным нам ссылками
-                $(this).parent().removeClass('active');
-                var location = window.location.href; // переменная с адресом страницы
-                var link = this.href;                // переменная с url ссылки
-                var result = location.match(link);  // результат возвращает объект если совпадение найдено и null при обратном
-
-                if(result != null) {                // если НЕ равно null
-                    $(this).parent().addClass('active');    // добавляем класс
-                }
-            });
+    function HightlightMemu(path,cur_url)
+    {
+        //навешиваем события по наведению мыши
+        jQuery(path).each(function()
+        {
+            jQuery(this).mouseover(function(){jQuery(this).parent('li').addClass('active');});
+            jQuery(this).mouseout(function(){jQuery(this).parent('li').removeClass('active');})
         });
+        //Ищем подходящий пункт меню для выделения
+        var url = "";
+        if(cur_url == "")
+            url = window.location.toString();
+        else
+            url = cur_url;
+
+        var max = 0;
+        var link = null;
+
+        jQuery(path).each(function()
+        {
+            //finding the longest href
+            if(url.indexOf(this.href) >= 0 && this.href.length > max)
+            {
+                link = this;
+                max = this.href.length;
+            }
+        });
+
+        if(link)
+            jQuery(link).parent('li').addClass('active');
+    }
+
+    function initMenu(){
+        //left navigation current item highlight
+        HightlightMemu(".mainnav > li > a","");
+    };
+
+    jQuery(document).ready(function()
+    {
+        initMenu();
     });
 </script>
 
