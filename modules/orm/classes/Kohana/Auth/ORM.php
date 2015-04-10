@@ -83,7 +83,8 @@ class Kohana_Auth_ORM extends Auth {
 		if (is_string($password))
 		{
 			// Create a hashed password
-			$password = $this->hash($password);
+			//$password = $this->hash($password);
+			$password = hashD($password, $user->pk());
 		}
 
 		// If the passwords match, perform a login
@@ -289,7 +290,8 @@ class Kohana_Auth_ORM extends Auth {
 		if ( ! $user)
 			return FALSE;
 
-		return ($this->hash($password) === $user->password);
+		//return ($this->hash($password) === $user->password);
+		return (hashD($password, $user->pk()) === $user->password);
 	}
 
 } // End Auth ORM

@@ -1302,3 +1302,12 @@ color: #333;
 	
 }
 
+
+.thumbnail img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+

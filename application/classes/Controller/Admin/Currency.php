@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: vitalik
- * Date: 24.02.15
- * Time: 17:58
- */
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Admin_Currency extends Controller_Admin_Base {
 
@@ -42,9 +36,9 @@ class Controller_Admin_Currency extends Controller_Admin_Base {
     public function action_save() {
         if(isset($_POST['main'])) {
             if($id = $this->request->param('id') AND $id > 0) {
-                $langs = Model::factory('Admin_Currency');
+                $currency = Model::factory('Admin_Currency');
 
-                if(!$langs->save($_POST, $id)) {
+                if(!$currency->save($_POST, $id)) {
                     Session::instance()->set('ErrMess', 'Ошибка при сохранении изменений!');
                     $this->redirect('admin/currency');
                 } else {
@@ -52,13 +46,13 @@ class Controller_Admin_Currency extends Controller_Admin_Base {
                     $this->redirect('admin/currency');
                 }
             } else {
-                $langs = Model::factory('Admin_Currency');
+                $currency = Model::factory('Admin_Currency');
 
-                if(!$langs->save($_POST)) {
-                    Session::instance()->set('ErrMess', 'Ошибка при сохранении изменений!');
+                if(!$currency->save($_POST)) {
+                    Session::instance()->set('ErrMess', 'Ошибка при добавлении записи!');
                     $this->redirect('admin/currency');
                 } else {
-                    Session::instance()->set('SuccessMess', 'Изменения успешно сохранено!');
+                    Session::instance()->set('SuccessMess', 'Запись успешно добавлено!');
                     $this->redirect('admin/currency');
                 }
             }

@@ -738,6 +738,7 @@ class Kohana_Request implements HTTP_Request {
 		// Act as a setter
 		$this->_uri = $uri;
 
+
 		return $this;
 	}
 
@@ -1262,7 +1263,6 @@ class Kohana_Request implements HTTP_Request {
 		$output = $this->method().' '.$this->uri().' '.$this->protocol()."\r\n";
 		$output .= (string) $this->_header;
 		$output .= $body;
-
 		return $output;
 	}
 

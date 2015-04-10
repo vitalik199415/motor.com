@@ -1,4 +1,4 @@
-<?php
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Admin_Login extends Controller_Admin_Base {
 
@@ -17,8 +17,9 @@ class Controller_Admin_Login extends Controller_Admin_Base {
         }
 
         $this->template->title = 'Вход';
-        $this->template->styles = array('style', 'pages/signin');
-        $this->template->scripts = array('signin');
+        Template::add_css('admin/style');
+        Template::add_css('admin/pages/signin');
+        Template::add_js('signin');
         $this->template->navbar = View::factory('admin/login/loginnavbar');
         $this->template->content = View::factory('admin/login/login', $data);
     }
@@ -50,6 +51,10 @@ class Controller_Admin_Login extends Controller_Admin_Base {
             if($success) {
                 $this->template->content = 'success';
                 $this->redirect('admin');
+            } else {
+                $this->error[] = 'Пользователь не найден, или у вас нет доступа.';
+                $this->session->set('ErrorArray', $this->error);
+                $this->redirect('admin/login');
             }
         } else {
             $this->error[] = 'Не корректное или пустое поле "Логин" или "Пароль".';

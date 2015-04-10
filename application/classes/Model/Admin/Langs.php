@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: vitalik
- * Date: 16.02.15
- * Time: 17:17
- */
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Langs extends Model {
     const LANGS         = 'langs';
@@ -16,6 +10,22 @@ class Model_Admin_Langs extends Model {
         } else {
             return $res = DB::select()->from(self::LANGS)->as_assoc()->execute();
         }
+    }
+
+    public function get_active_langs() {
+        $res = DB::select()->from(self::LANGS)->where('active', '=', 1)->as_assoc()->execute();
+
+        $langs = array();
+        foreach($res as $lang) {
+            $langs[$lang['code']] = $lang['name'];
+        }
+
+        return $langs;
+    }
+
+    public function get_lang_info($lang) {
+        $res = DB::select()->from(self::LANGS)->where('code', '=', $lang)->as_assoc()->execute();
+        return $res[0];
     }
 
     public function save($data, $id = FALSE) {

@@ -2,7 +2,7 @@
     <div class="main-inner">
         <div class="container">
             <form action="<?=URL::set_url('admin/langs/save/').@$id;?>" method="post" id="add_edit_form" class="form-horizontal">
-            <div class="row">
+            <div class="row action">
                 <div class="span12">
                     <div class="widget action-btn">
                         <!--<div class="widget-header"><i class="icon-legal"></i>

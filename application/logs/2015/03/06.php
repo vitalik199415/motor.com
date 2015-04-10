@@ -1,0 +1,65 @@
+<?php defined('SYSPATH') OR die('No direct script access.'); ?>
+
+2015-03-06 12:28:57 --- EMERGENCY: ErrorException [ 2 ]: Invalid argument supplied for foreach() ~ APPPATH/views/admin/template.php [ 22 ] in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 12:28:57 --- DEBUG: #0 /opt/lampp/htdocs/motor.com/application/views/admin/template.php(22): Kohana_Core::error_handler(2, 'Invalid argumen...', '/opt/lampp/htdo...', 22, Array)
+#1 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(62): include('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(359): Kohana_View::capture('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#4 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client/Internal.php(98): ReflectionMethod->invoke(Object(Controller_Admin_Categories))
+#7 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request.php(998): Kohana_Request_Client->execute(Object(Request))
+#9 /opt/lampp/htdocs/motor.com/index.php(118): Kohana_Request->execute()
+#10 {main} in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 12:29:43 --- EMERGENCY: ErrorException [ 2 ]: Invalid argument supplied for foreach() ~ APPPATH/views/admin/template.php [ 22 ] in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 12:29:43 --- DEBUG: #0 /opt/lampp/htdocs/motor.com/application/views/admin/template.php(22): Kohana_Core::error_handler(2, 'Invalid argumen...', '/opt/lampp/htdo...', 22, Array)
+#1 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(62): include('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(359): Kohana_View::capture('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#4 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client/Internal.php(98): ReflectionMethod->invoke(Object(Controller_Admin_Categories))
+#7 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request.php(998): Kohana_Request_Client->execute(Object(Request))
+#9 /opt/lampp/htdocs/motor.com/index.php(118): Kohana_Request->execute()
+#10 {main} in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 12:29:58 --- EMERGENCY: ErrorException [ 2 ]: Invalid argument supplied for foreach() ~ APPPATH/views/admin/template.php [ 22 ] in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 12:29:58 --- DEBUG: #0 /opt/lampp/htdocs/motor.com/application/views/admin/template.php(22): Kohana_Core::error_handler(2, 'Invalid argumen...', '/opt/lampp/htdo...', 22, Array)
+#1 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(62): include('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(359): Kohana_View::capture('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#4 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client/Internal.php(98): ReflectionMethod->invoke(Object(Controller_Admin_Pages))
+#7 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request.php(998): Kohana_Request_Client->execute(Object(Request))
+#9 /opt/lampp/htdocs/motor.com/index.php(118): Kohana_Request->execute()
+#10 {main} in /opt/lampp/htdocs/motor.com/application/views/admin/template.php:22
+2015-03-06 13:07:34 --- EMERGENCY: Database_Exception [ 1054 ]: Unknown column 'preview' in 'field list' [ UPDATE `products` SET `preview` = 0 WHERE `id_products` = '2' ] ~ MODPATH/database/classes/Kohana/Database/MySQLi.php [ 171 ] in /opt/lampp/htdocs/motor.com/modules/database/classes/Kohana/Database/Query.php:251
+2015-03-06 13:07:34 --- DEBUG: #0 /opt/lampp/htdocs/motor.com/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQLi->query(3, 'UPDATE `product...', false, Array)
+#1 /opt/lampp/htdocs/motor.com/application/classes/Model/Admin/Products.php(183): Kohana_Database_Query->execute()
+#2 /opt/lampp/htdocs/motor.com/application/classes/Controller/Admin/Products.php(86): Model_Admin_Products->set_preview('3', '2')
+#3 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller.php(84): Controller_Admin_Products->action_set_preview()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client/Internal.php(98): ReflectionMethod->invoke(Object(Controller_Admin_Products))
+#6 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request.php(998): Kohana_Request_Client->execute(Object(Request))
+#8 /opt/lampp/htdocs/motor.com/index.php(118): Kohana_Request->execute()
+#9 {main} in /opt/lampp/htdocs/motor.com/modules/database/classes/Kohana/Database/Query.php:251
+2015-03-06 15:55:28 --- EMERGENCY: ErrorException [ 2 ]: Illegal string offset 'id_categories' ~ APPPATH/views/admin/products/add_edit.php [ 159 ] in /opt/lampp/htdocs/motor.com/application/views/admin/products/add_edit.php:159
+2015-03-06 15:55:28 --- DEBUG: #0 /opt/lampp/htdocs/motor.com/application/views/admin/products/add_edit.php(159): Kohana_Core::error_handler(2, 'Illegal string ...', '/opt/lampp/htdo...', 159, Array)
+#1 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(62): include('/opt/lampp/htdo...')
+#2 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(359): Kohana_View::capture('/opt/lampp/htdo...', Array)
+#3 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(236): Kohana_View->render()
+#4 /opt/lampp/htdocs/motor.com/application/views/admin/template.php(35): Kohana_View->__toString()
+#5 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(62): include('/opt/lampp/htdo...')
+#6 /opt/lampp/htdocs/motor.com/system/classes/Kohana/View.php(359): Kohana_View::capture('/opt/lampp/htdo...', Array)
+#7 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client/Internal.php(98): ReflectionMethod->invoke(Object(Controller_Admin_Products))
+#11 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /opt/lampp/htdocs/motor.com/system/classes/Kohana/Request.php(998): Kohana_Request_Client->execute(Object(Request))
+#13 /opt/lampp/htdocs/motor.com/index.php(118): Kohana_Request->execute()
+#14 {main} in /opt/lampp/htdocs/motor.com/application/views/admin/products/add_edit.php:159

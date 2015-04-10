@@ -34,7 +34,7 @@
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                            <table class="table table-striped table-bordered" >
+                            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th> Код валюты </th>

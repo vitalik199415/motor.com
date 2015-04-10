@@ -1,4 +1,4 @@
-<?php
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Model_Admin_Currency extends Model {
     const CURR         = 'currency';
@@ -10,6 +10,15 @@ class Model_Admin_Currency extends Model {
         } else {
             return $res = DB::select()->from(self::CURR)->as_assoc()->execute();
         }
+    }
+
+    public function get_active_currency() {
+        return $res = DB::select()->from(self::CURR)->where('active', '=', 1)->as_assoc()->execute();
+    }
+
+    public function get_currency_info($code) {
+        $res = DB::select()->from(self::CURR)->where('code', '=', $code)->as_assoc()->execute();
+        return $res[0];
     }
 
     public function save($data, $id = FALSE) {

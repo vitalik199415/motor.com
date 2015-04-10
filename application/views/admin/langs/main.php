@@ -34,7 +34,7 @@
                         </div>
                         <!-- /widget-header -->
                         <div class="widget-content">
-                            <table class="table table-striped table-bordered" >
+                            <table id="example" class="table table-striped table-bordered" >
                                 <thead>
                                 <tr>
                                     <th> Код языка </th>

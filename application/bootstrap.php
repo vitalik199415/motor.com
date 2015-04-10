@@ -5,6 +5,12 @@
 // Load the core Kohana class
 require SYSPATH.'classes/Kohana/Core'.EXT;
 
+// Load the Krumo var_dump plugin
+require APPPATH.'Krumo/class.krumo'.EXT;
+
+// Load the my hash method plugin
+require APPPATH.'classes/Hash'.EXT;
+
 if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
 	// Application extends the core
@@ -68,7 +74,7 @@ mb_substitute_character('none');
 /**
  * Set the default language
  */
-I18n::lang('ru-ru');
+I18n::lang('ru');
 
 if (isset($_SERVER['SERVER_PROTOCOL']))
 {
@@ -86,6 +92,52 @@ if (isset($_SERVER['KOHANA_ENV']))
 {
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
+
+
+/**
+ * Рекурсивная функция для реструктуризации массива
+ *
+ * @param array   $arrayForFill          Массив для заполнения.
+ *                                       Этот массив будет содержать "правильное"
+ *                                       представление $_FILES
+ * @param string  $currentKey            Ключ текущей позиции
+ * @param mixed   $currentMixedValue     Значение текущей позиции
+ * @param string  $fileDescriptionParam  Текущий параметр описания файла
+ *                                       (name, type, tmp_name, error или size)
+ * @return void
+ */
+function rRestructuringFilesArray(&$arrayForFill, $currentKey, $currentMixedValue, $fileDescriptionParam)
+{
+	if (is_array($currentMixedValue)) {
+		foreach ($currentMixedValue as $nameKey => $mixedValue) {
+			rRestructuringFilesArray($arrayForFill[$currentKey],
+				$nameKey,
+				$mixedValue,
+				$fileDescriptionParam);
+		}
+	} else {
+		$arrayForFill[$currentKey][$fileDescriptionParam] = $currentMixedValue;
+	}
+}
+
+// массив, в котором будем формировать "правильный" $_FILES
+$arrayForFill = array();
+
+// первый уровень проходим без изменения
+foreach ($_FILES as $firstNameKey => $arFileDescriptions) {
+
+	// а вот со второго уровня интерпритатор делает то,
+	// что мне в большинстве случаев не подходит
+	foreach ($arFileDescriptions as $fileDescriptionParam => $mixedValue) {
+		rRestructuringFilesArray($arrayForFill,
+			$firstNameKey,
+			$_FILES[$firstNameKey][$fileDescriptionParam],
+			$fileDescriptionParam);
+	}
+}
+// перегружаем $_FILES сформированным массивом
+$_FILES = $arrayForFill;
+
 
 /**
  * Initialize Kohana, setting the default options.
@@ -131,6 +183,7 @@ Kohana::modules(array(
 	   'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	   'pagination' => MODPATH.'pagination', // Pagination
 	));
 
 /**
@@ -146,6 +199,7 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
 Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'directory'	 => 'admin',
@@ -153,8 +207,40 @@ Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 		'action'     => 'index'
 	));
 
-Route::set('default', '(<controller>(/<action>(/<id>)))')
+Route::set('category', 'category(/<cat>(/<param>))')
 	->defaults(array(
-		'controller' => 'welcome',
+		'controller' => 'categories',
 		'action'     => 'index'
 	));
+
+Route::set('products', 'products(/<param>)')
+	->defaults(array(
+		'controller' => 'products',
+		'action'     => 'index'
+	));
+
+/*Route::set('products', 'products(/<brand>(/<category>))')
+	->defaults(array(
+		'controller' => 'products',
+		'action'     => 'index'
+	));*/
+
+Route::set('login', 'login(/<action>(/<param>))')
+	->defaults(array(
+		'controller' => 'login',
+		'action'     => 'index'
+	));
+
+Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
+	->defaults(array(
+		'controller' => 'error',
+	));
+
+Route::set('default', '(<controller>(/<param>))', array('lang' => '(en|ru|ua)'))
+	->defaults(array(
+		'lang'		 => 'ru',
+		'controller' => 'main',
+		'action'     => 'index'
+	));
+
+set_exception_handler(array('Exceptionhandler', 'handle'));

@@ -2,7 +2,7 @@
     <div class="main-inner">
         <div class="container">
             <form action="<?=URL::set_url('admin/currency/save/').@$id;?>" method="post" id="add_edit_form" class="form-horizontal">
-            <div class="row">
+            <div class="row action">
                 <div class="span12">
                     <div class="widget action-btn">
                         <!--<div class="widget-header"><i class="icon-legal"></i>
@@ -28,7 +28,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="code">Код валюты: </label>
                                         <div class="controls">
-                                            <input name="main[code]" type="text" class="span6" id="code" value="<?=@$main['code'];?>">
+                                            <input name="main[code]" type="text" class="span6" id="code" value="<?=@$main['code'];?>"  maxlength="4" data-validation-required-message="Поле обязательно для заполнения.">
                                             <p class="help-block"></p>
                                             <!--<p class="help-block">Your username is for logging in and cannot be changed.</p>-->
                                         </div> <!-- /controls -->
@@ -36,15 +36,13 @@
                                     <div class="control-group">
                                         <label class="control-label" for="name">Название валюты: </label>
                                         <div class="controls">
-                                            <input name="main[name]" type="text" class="span6" id="name" value="<?=@$main['name'];?>">
-                                            <p class="help-block"></p>
+                                            <input name="main[name]" type="text" class="span6" id="name" value="<?=@$main['name'];?>"  maxlength="4"  data-validation-required-message="Поле обязательно для заполнения.">
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
                                     <div class="control-group">
                                         <label class="control-label" for="rate">Ставка: </label>
                                         <div class="controls">
-                                            <input name="main[rate]" type="text" class="span6" id="rate" value="<?=@$main['rate'];?>">
-                                            <p class="help-block"></p>
+                                            <input name="main[rate]" type="text" class="span6" id="rate" value="<?=@$main['rate'];?>" pattern="\d+\.\d{2}" data-validation-pattern-message="Поле должно быть в формате '0.00'." data-validation-required-message="Поле обязательно для заполнения.">
                                         </div> <!-- /controls -->
                                     </div> <!-- /control-group -->
                                     <div class="control-group">

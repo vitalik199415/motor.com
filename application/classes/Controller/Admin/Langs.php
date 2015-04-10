@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: vitalik
- * Date: 16.02.15
- * Time: 16:47
- */
+<?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Admin_Langs extends Controller_Admin_Base {
 
