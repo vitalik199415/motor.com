@@ -12,9 +12,15 @@ class Controller_Products extends Controller_Base {
     }
 
     public function action_index() {
-        $cat = $this->request->param('cat');
-        if($this->request->param('param')) {
-            $data = $this->build_pagination($cat, $this->request->param('param'));
+
+        $targetpage = $this->request->uri();
+        $page = $this->request->query('page');
+
+        if($brand = $this->request->param('brand')) {
+            $data = $this->build_pagination($targetpage, $page, $brand);
+            if($brand = $this->request->param('category')) {
+                $data = $this->build_pagination($cat, $this->request->param('param'));
+            }
         } else {
             $data = $this->build_pagination($cat);
         }
@@ -26,9 +32,8 @@ class Controller_Products extends Controller_Base {
         $this->template->title = $data['title'];
     }
 
-    public function build_pagination($category, $page = FALSE)
+    public function build_pagination($targetpage, $page = FALSE, $brand = FALSE, $category = FALSE)
     {
-        $targetpage = URL::set_url("category/".$category);
 
         $limit = $this->session->get('product_limit');
         if(!$limit) { $limit = 9; }

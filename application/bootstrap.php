@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 // -- Environment setup --------------------------------------------------------
-
 // Load the core Kohana class
 require SYSPATH.'classes/Kohana/Core'.EXT;
 
@@ -13,12 +12,12 @@ require APPPATH.'classes/Hash'.EXT;
 
 if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
-	// Application extends the core
+// Application extends the core
 	require APPPATH.'classes/Kohana'.EXT;
 }
 else
 {
-	// Load empty core extension
+// Load empty core extension
 	require SYSPATH.'classes/Kohana'.EXT;
 }
 
@@ -53,7 +52,6 @@ spl_autoload_register(array('Kohana', 'auto_load'));
  * It is recommended to not enable this unless absolutely necessary.
  */
 //spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
-
 /**
  * Enable the Kohana auto-loader for unserialization.
  *
@@ -70,7 +68,6 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 mb_substitute_character('none');
 
 // -- Configuration and initialization -----------------------------------------
-
 /**
  * Set the default language
  */
@@ -78,7 +75,7 @@ I18n::lang('ru');
 
 if (isset($_SERVER['SERVER_PROTOCOL']))
 {
-	// Replace the default protocol.
+// Replace the default protocol.
 	HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
 }
 
@@ -93,17 +90,16 @@ if (isset($_SERVER['KOHANA_ENV']))
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
 
-
 /**
  * Рекурсивная функция для реструктуризации массива
  *
- * @param array   $arrayForFill          Массив для заполнения.
- *                                       Этот массив будет содержать "правильное"
- *                                       представление $_FILES
- * @param string  $currentKey            Ключ текущей позиции
- * @param mixed   $currentMixedValue     Значение текущей позиции
- * @param string  $fileDescriptionParam  Текущий параметр описания файла
- *                                       (name, type, tmp_name, error или size)
+ * @param array $arrayForFill Массив для заполнения.
+ * Этот массив будет содержать "правильное"
+ * представление $_FILES
+ * @param string $currentKey Ключ текущей позиции
+ * @param mixed $currentMixedValue Значение текущей позиции
+ * @param string $fileDescriptionParam Текущий параметр описания файла
+ * (name, type, tmp_name, error или size)
  * @return void
  */
 function rRestructuringFilesArray(&$arrayForFill, $currentKey, $currentMixedValue, $fileDescriptionParam)
@@ -119,15 +115,12 @@ function rRestructuringFilesArray(&$arrayForFill, $currentKey, $currentMixedValu
 		$arrayForFill[$currentKey][$fileDescriptionParam] = $currentMixedValue;
 	}
 }
-
 // массив, в котором будем формировать "правильный" $_FILES
 $arrayForFill = array();
-
 // первый уровень проходим без изменения
 foreach ($_FILES as $firstNameKey => $arFileDescriptions) {
-
-	// а вот со второго уровня интерпритатор делает то,
-	// что мне в большинстве случаев не подходит
+// а вот со второго уровня интерпритатор делает то,
+// что мне в большинстве случаев не подходит
 	foreach ($arFileDescriptions as $fileDescriptionParam => $mixedValue) {
 		rRestructuringFilesArray($arrayForFill,
 			$firstNameKey,
@@ -138,24 +131,23 @@ foreach ($_FILES as $firstNameKey => $arFileDescriptions) {
 // перегружаем $_FILES сформированным массивом
 $_FILES = $arrayForFill;
 
-
 /**
  * Initialize Kohana, setting the default options.
  *
  * The following options are available:
  *
- * - string   base_url    path, and optionally domain, of your application   NULL
- * - string   index_file  name of your index file, usually "index.php"       index.php
- * - string   charset     internal character set used for input and output   utf-8
- * - string   cache_dir   set the internal cache directory                   APPPATH/cache
- * - integer  cache_life  lifetime, in seconds, of items cached              60
- * - boolean  errors      enable or disable error handling                   TRUE
- * - boolean  profile     enable or disable internal profiling               TRUE
- * - boolean  caching     enable or disable internal caching                 FALSE
- * - boolean  expose      set the X-Powered-By header                        FALSE
+ * - string base_url path, and optionally domain, of your application NULL
+ * - string index_file name of your index file, usually "index.php" index.php
+ * - string charset internal character set used for input and output utf-8
+ * - string cache_dir set the internal cache directory APPPATH/cache
+ * - integer cache_life lifetime, in seconds, of items cached 60
+ * - boolean errors enable or disable error handling TRUE
+ * - boolean profile enable or disable internal profiling TRUE
+ * - boolean caching enable or disable internal caching FALSE
+ * - boolean expose set the X-Powered-By header FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/',
+	'base_url' => '/',
 	'index_file' => FALSE
 ));
 
@@ -173,62 +165,61 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	   'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	   'database'   => MODPATH.'database',   // Database access
-	   'mysqli' 	=> MODPATH.'mysqli',     // MySQLi
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	   'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-	   'pagination' => MODPATH.'pagination', // Pagination
-	));
+	'auth' => MODPATH.'auth', // Basic authentication
+// 'cache' => MODPATH.'cache', // Caching with multiple backends
+// 'codebench' => MODPATH.'codebench', // Benchmarking tool
+	'database' => MODPATH.'database', // Database access
+	'mysqli' => MODPATH.'mysqli', // MySQLi
+// 'image' => MODPATH.'image', // Image manipulation
+// 'minion' => MODPATH.'minion', // CLI Tasks
+	'orm' => MODPATH.'orm', // Object Relationship Mapping
+// 'unittest' => MODPATH.'unittest', // Unit testing
+// 'userguide' => MODPATH.'userguide', // User guide and API documentation
+	'pagination' => MODPATH.'pagination', // Pagination
+));
 
 /**
  * Cookie Salt
- * @see  http://kohanaframework.org/3.3/guide/kohana/cookies
- * 
+ * @see http://kohanaframework.org/3.3/guide/kohana/cookies
+ *
  * If you have not defined a cookie salt in your Cookie class then
  * uncomment the line below and define a preferrably long salt.
  */
- Cookie::$salt = '234345234324352';
+Cookie::$salt = '234345234324352';
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
 Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'directory'	 => 'admin',
+		'directory'	=> 'admin',
 		'controller' => 'main',
-		'action'     => 'index'
+		'action' => 'index'
 	));
 
 Route::set('category', 'category(/<cat>(/<param>))')
 	->defaults(array(
 		'controller' => 'categories',
-		'action'     => 'index'
+		'action' => 'index'
 	));
 
-Route::set('products', 'products(/<param>)')
+/*Route::set('products', 'products(/<param>)')
 	->defaults(array(
 		'controller' => 'products',
-		'action'     => 'index'
-	));
-
-/*Route::set('products', 'products(/<brand>(/<category>))')
-	->defaults(array(
-		'controller' => 'products',
-		'action'     => 'index'
+		'action' => 'index'
 	));*/
+
+Route::set('products', 'products(/<brand>(/<category>))')
+	->defaults(array(
+		'controller' => 'products',
+		'action' => 'index'
+	));
 
 Route::set('login', 'login(/<action>(/<param>))')
 	->defaults(array(
 		'controller' => 'login',
-		'action'     => 'index'
+		'action' => 'index'
 	));
 
 Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
@@ -238,9 +229,9 @@ Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', '
 
 Route::set('default', '(<controller>(/<param>))', array('lang' => '(en|ru|ua)'))
 	->defaults(array(
-		'lang'		 => 'ru',
+		'lang'	=> 'ru',
 		'controller' => 'main',
-		'action'     => 'index'
+		'action' => 'index'
 	));
 
 set_exception_handler(array('Exceptionhandler', 'handle'));
