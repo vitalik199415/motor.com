@@ -11,6 +11,7 @@
                     <? endif;
                 endforeach; ?>
             </div>
+            <? if(count($images) > 1): ?>
             <div id="similar-product" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner my-carousel">
@@ -21,6 +22,9 @@
                         <? endif;
                         $i++;  if($i == 3) {echo "</div>"; $i = 0; }
                     endforeach; ?>
+                    <? if(count($images) < 2): ?>
+                        </div>
+                    <? endif; ?>
                 </div>
 
                 <!-- Controls -->
@@ -31,6 +35,7 @@
                     <i class="fa fa-angle-right"></i>
                 </a>
             </div>
+        <? endif; ?>
         </div>
         <div class="col-sm-7">
             <div class="product-information"><!--/product-information-->

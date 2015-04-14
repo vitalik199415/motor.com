@@ -34,7 +34,7 @@
         <img src="<?=URL::base();?>img/system/404.png" class="img-responsive" alt="404" />
         <h1><b>OPPS!</b> <?=__('We Couldn’t Find this Page')?></h1>
         <p><?=__('Uh... So it looks like you brock something.').__('The page you are looking for has up and Vanished')?></p>
-        <h2><a href="<?=URL::base();?>"><?=__('Bring me back Home')?></a></h2>
+        <h2><a href="<? header("Location: ". $_SERVER['HTTP_REFERER'])?>"><?=__('Bring me back')?></a></h2>
     </div>
 </div>
 
