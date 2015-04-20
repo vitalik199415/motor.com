@@ -26,14 +26,14 @@
                         <!-- /widget-header -->
                         <div class="widget-content">
                                 <fieldset>
-                                    <div class="control-group">
+                                    <!--<div class="control-group">
                                         <label class="control-label" for="lang">Родительский пункт меню: </label>
                                         <div class="controls">
-                                            <?=Form::select('main[id_parent]', @$menu, @$main['id_parent'], array('class' => 'span10', 'id' => 'parent'));?>
-                                        </div> <!-- /controls -->
-                                    </div> <!-- /control-group -->
+                                            <?/*=Form::select('main[id_parent]', @$menu, @$main['id_parent'], array('class' => 'span10', 'id' => 'parent'));*/?>
+                                        </div> <!-- /controls
+                                    </div>--> <!-- /control-group -->
                                     <div class="control-group">
-                                        <label class="control-label" for="url">URL пункта меню: </label>
+                                        <label class="control-label" for="url">URL страницы: </label>
                                         <div class="controls">
                                             <input name="main[url]" type="text" class="span10" id="url" value="<?=@$main['url'];?>" required data-validation-required-message="Поле обязательно для заполнения.">
                                         </div> <!-- /controls -->

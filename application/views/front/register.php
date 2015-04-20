@@ -4,7 +4,7 @@
             <div class="col-sm-4 col-sm-offset-4">
                 <div class="signup-form"><!--sign up form-->
                     <h2><?=__('New User Signup!')?></h2>
-                    <form action="<?=URL::set_url('register')?>" method="post" id="register_form">
+                    <form action="<?=URL::set_url('register/register')?>" method="post" id="register_form">
                         <input type="text" name="login" placeholder="<?=__('Login')?>" />
                         <input type="email" name="email" placeholder="<?=__('Email Address')?>" />
                         <input type="password" name="password" id="password" placeholder="<?=__('Password')?>" />

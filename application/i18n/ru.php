@@ -89,7 +89,7 @@ return array(
     'We Couldn’t Find this Page' => 'Мы не смогли найти запрашиваемую страницу',
     'Uh... So it looks like you brock something.' => 'Хм... похоже, что вы что-то пропустили.',
     'The page you are looking for has up and Vanished' => 'Страница, которую вы ищете, куда-то исчезла.',
-    'Bring me back' => 'Вернуться назад',
+    'Bring me back to home' => 'Вернуться на главную',
 
 
     //Products page
@@ -101,5 +101,10 @@ return array(
     'New products'          => 'Новые товары',
     'Availability'          => 'Наличие',
     'Quantity'              => 'Количество',
+
+    'News per page'         => 'Новостей на страницу',
+    'Read more'             => 'Читать далее',
+
+    'Page not found'        => 'Страница не найдена',
 
 );

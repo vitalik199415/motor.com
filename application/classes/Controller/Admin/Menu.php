@@ -10,6 +10,7 @@ class Controller_Admin_Menu extends Controller_Admin_Base {
     public function action_index() {
         $data['main'] = Model::factory('Admin_Menu')->get_all_menu();
 
+
         $data['err_mess'] = $this->session->get('ErrorMess');
         $this->session->delete('ErrorMess');
         $data['success_mess'] = $this->session->get('SuccessMess');
@@ -79,6 +80,42 @@ class Controller_Admin_Menu extends Controller_Admin_Base {
             }
         } else {
             Message::add_error('Параметр ID не установлено, удаление не возможно!');
+            $this->redirect('admin/menu');
+        }
+    }
+
+    public function action_up() {
+        $id = $this->request->param('id');
+
+        if($id) {
+            $categories = Model::factory('Admin_Menu');
+            if(!$categories->up($id)) {
+                Message::add_error('Ошибка при смене позиции!');
+                $this->redirect('admin/menu');
+            } else {
+                Message::add_success('Позиция успешно изменена!');
+                $this->redirect('admin/menu');
+            }
+        } else {
+            Message::add_error('Параметр ID не установлено, действие не возможно!');
+            $this->redirect('admin/menu');
+        }
+    }
+
+    public function action_down() {
+        $id = $this->request->param('id');
+
+        if($id) {
+            $categories = Model::factory('Admin_Menu');
+            if(!$categories->down($id)) {
+                Message::add_error('Ошибка при смене позиции!');
+                $this->redirect('admin/menu');
+            } else {
+                Message::add_success('Позиция успешно изменена!');
+                $this->redirect('admin/menu');
+            }
+        } else {
+            Message::add_error('Параметр ID не установлено, действие не возможно!');
             $this->redirect('admin/menu');
         }
     }

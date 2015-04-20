@@ -1,42 +1,45 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Categories extends Controller_Base {
+class Controller_News extends Controller_Base {
 
     private $prod_model;
     private $category;
 
     public function before() {
-        $this->prod_model = Model::factory('Products');
+        $this->prod_model = Model::factory('News');
         $this->category = Model::factory('Categories');
         parent::before();
     }
 
     public function action_index() {
-        $cat = $this->request->param('cat');
-        if($this->request->param('param')) {
-            $data = $this->build_pagination($cat, $this->request->param('param'));
+        $targetpage = $this->request->uri();
+        $targetpage = '/'.$targetpage;
+        $page = $this->request->query('page');
+
+        if($page) {
+            $data = $this->build_pagination($targetpage, $page);
         } else {
-            $data = $this->build_pagination($cat);
+            $data = $this->build_pagination($targetpage);
         }
-        $data['title'] = $this->category->get_cat_info($cat, $this->lang)['name'];
-        $data['categories'] = $this->category->get_cat($this->lang);
+        $data['title'] = 'News';
+//        $data['categories'] = Model::factory('Categories')->get_cat($this->lang);
+        $data['categories'] = Controller_Menu::build_menu($this->lang);
         $data['brands'] = Model::factory('Brands')->get_brands($this->lang);
         $data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
         $data['curr'] = Model::factory('Admin_Currency')->get_currency_info($this->currency);
-        $this->template->left_sidebar = View::factory('front/left_sidebar', $data);
-        $this->template->content = View::factory('front/products', $data);
-        $this->template->title = $data['title'];
+        $this->template->left_sidebar = View::factory('front/left_block', $data);
+        $this->template->content = View::factory('front/news', $data);
+        $this->template->title = 'News';
     }
 
-    public function build_pagination($category, $page = FALSE)
+    public function build_pagination($targetpage, $page = FALSE)
     {
-        $targetpage = URL::set_url("category/".$category);
 
-        $limit = $this->session->get('product_limit');
+        $limit = $this->session->get('news_limit');
         if(!$limit) { $limit = 9; }
 
-        $total_pages = $this->prod_model->get_prod_count_by_cat($category);
-        $total_pages = $total_pages['num'];
+        $total_pages = $this->prod_model->news_count();
+        $total_pages = $total_pages['total'];
 
         $stages = 3;
 
@@ -48,8 +51,8 @@ class Controller_Categories extends Controller_Base {
 
         // Get page data
         //$query1 = "SELECT * FROM $tableName LIMIT $start, $limit";
-        $result = $this->prod_model->get_products_by_cat($category, $limit, $start, $this->lang);
-        $data['products'] = $result;
+        $result = $this->prod_model->get_news($start, $limit, $this->lang);
+        $data['news'] = $result;
 
         // Initial page num setup
         if ($page == 0) {
@@ -75,9 +78,9 @@ class Controller_Categories extends Controller_Base {
             // Previous
             if ($page > 1) {
                 //First
-                $paginate .= "<li><a href='$targetpage/1' class='fa fa-angle-double-left'></li>";
+                $paginate .= "<li><a href='$targetpage?page=1' class='fa fa-angle-double-left'></li>";
 
-                $paginate .= "<li><a href='$targetpage/$prev' class='fa fa-angle-left'></a></li>";
+                $paginate .= "<li><a href='$targetpage?page=$prev' class='fa fa-angle-left'></a></li>";
             } else {
                 //First
                 $paginate .= "<li><a class='fa fa-angle-double-left'></a></li>";
@@ -93,7 +96,7 @@ class Controller_Categories extends Controller_Base {
                     if ($counter == $page) {
                         $paginate .= "<li class='active'><a>$counter</a></li>";
                     } else {
-                        $paginate .= "<li><a href='$targetpage/$counter'>$counter</a></li>";
+                        $paginate .= "<li><a href='$targetpage?page=$counter'>$counter</a></li>";
                     }
                 }
             } elseif ($lastpage > 5 + ($stages * 2))    // Enough pages to hide a few?
@@ -104,37 +107,37 @@ class Controller_Categories extends Controller_Base {
                         if ($counter == $page) {
                             $paginate .= "<li class='active'><a>$counter</a></li>";
                         } else {
-                            $paginate .= "<li><a href='$targetpage/$counter'>$counter</a></li>";
+                            $paginate .= "<li><a href='$targetpage?page=$counter'>$counter</a></li>";
                         }
                     }
                     $paginate .= "<li><a>...</a></li>";
-                    $paginate .= "<li><a href='$targetpage/$LastPagem1'>$LastPagem1</a></li>";
-                    $paginate .= "<li><a href='$targetpage/$lastpage'>$lastpage</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=$LastPagem1'>$LastPagem1</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=$lastpage'>$lastpage</a></li>";
                 } // Middle hide some front and some back
                 elseif ($lastpage - ($stages * 2) > $page && $page > ($stages * 2)) {
-                    $paginate .= "<li><a href='$targetpage/1'>1</a></li>";
-                    $paginate .= "<li><a href='$targetpage/2'>2</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=1'>1</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=2'>2</a></li>";
                     $paginate .= "<li><a>...</a></li>";
                     for ($counter = $page - $stages; $counter <= $page + $stages; $counter++) {
                         if ($counter == $page) {
                             $paginate .= "<li class='active'><a>$counter</a></li>";
                         } else {
-                            $paginate .= "<li><a href='$targetpage/$counter'>$counter</a></li>";
+                            $paginate .= "<li><a href='$targetpage?page=$counter'>$counter</a></li>";
                         }
                     }
                     $paginate .= "<li><a>...</a></li>";
-                    $paginate .= "<li><a href='$targetpage/$LastPagem1'>$LastPagem1</a></li>";
-                    $paginate .= "<li><a href='$targetpage/$lastpage'>$lastpage</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=$LastPagem1'>$LastPagem1</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=$lastpage'>$lastpage</a></li>";
                 } // End only hide early pages
                 else {
-                    $paginate .= "<li><a href='$targetpage/1'>1</a></li>";
-                    $paginate .= "<li><a href='$targetpage/2'>2</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=1'>1</a></li>";
+                    $paginate .= "<li><a href='$targetpage?page=2'>2</a></li>";
                     $paginate .= "<li><a>...</a></li>";
                     for ($counter = $lastpage - (2 + ($stages * 2)); $counter <= $lastpage; $counter++) {
                         if ($counter == $page) {
                             $paginate .= "<li class='active'><a>$counter</a></li>";
                         } else {
-                            $paginate .= "<li><a href='$targetpage/$counter'>$counter</a></li>";
+                            $paginate .= "<li><a href='$targetpage?page=$counter'>$counter</a></li>";
                         }
                     }
                 }
@@ -142,9 +145,9 @@ class Controller_Categories extends Controller_Base {
 
             // Next
             if ($page < $counter - 1) {
-                $paginate .= "<li><a href='$targetpage/$next' class='fa fa-angle-right'></a></li>";
+                $paginate .= "<li><a href='$targetpage?page=$next' class='fa fa-angle-right'></a></li>";
                 //Last
-                $paginate .= "<li><a href='$targetpage/$lastpage' class='fa fa-angle-double-right'></a></li>";
+                $paginate .= "<li><a href='$targetpage?page=$lastpage' class='fa fa-angle-double-right'></a></li>";
             } else {
                 $paginate .= "<li><a class='fa fa-angle-right'></a></li>";
                 //Last

@@ -260,10 +260,10 @@ a#scrollUp i{
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 155px;
+  width: 255px;
   background-image: url(/img/home/searchicon.png);
   background-repeat: no-repeat;
-  background-position: 130px;
+  background-position: 230px;
 }
 
 
@@ -2567,6 +2567,7 @@ h2.title {
 	}
 	.search_box{
 		margin-top:12px;
+        margin-bottom: 10px;
 	}
 	ul.sub-menu {
 		top: auto;

@@ -20,10 +20,12 @@ class Controller_Sale extends Controller_Base {
             $data = $this->build_pagination($targetpage);
         }
         $data['title'] = 'Sale of goods';
-        $data['categories'] = Model::factory('Categories')->get_cat($this->lang);
+//        $data['categories'] = Model::factory('Categories')->get_cat($this->lang);
+        $data['categories'] = Controller_Menu::build_menu($this->lang);
         $data['brands'] = Model::factory('Brands')->get_brands($this->lang);
+        $data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
         $data['curr'] = Model::factory('Admin_Currency')->get_currency_info($this->currency);
-        $this->template->left_sidebar = View::factory('front/left_sidebar', $data);
+        $this->template->left_sidebar = View::factory('front/left_block', $data);
         $this->template->content = View::factory('front/products', $data);
         $this->template->title = 'Sale';
     }
@@ -47,9 +49,8 @@ class Controller_Sale extends Controller_Base {
 
         // Get page data
         //$query1 = "SELECT * FROM $tableName LIMIT $start, $limit";
-        $result = $this->prod_model->sale_products($this->lang);
+        $result = $this->prod_model->sale_products($start, $limit, $this->lang);
         $data['products'] = $result;
-        krumo($result);
 
         // Initial page num setup
         if ($page == 0) {

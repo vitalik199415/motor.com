@@ -1,5 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+
 // -- Environment setup --------------------------------------------------------
 // Load the core Kohana class
 require SYSPATH.'classes/Kohana/Core'.EXT;
@@ -219,6 +220,12 @@ Route::set('products', 'products(/<brand>(/<category>))')
 Route::set('login', 'login(/<action>(/<param>))')
 	->defaults(array(
 		'controller' => 'login',
+		'action' => 'index'
+	));
+
+Route::set('register', 'register(/<action>(/<param>))')
+	->defaults(array(
+		'controller' => 'register',
 		'action' => 'index'
 	));
 

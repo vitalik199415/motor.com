@@ -6,7 +6,7 @@ class Model_Admin_Menu extends Model {
     const MENU_DESC         = 'menu_description';
     const ID_MENU_DESC      = 'id_menu_description';
 
-    public function get_all_menu($id = FALSE) {
+    public function get_all_menu($id = FALSE, $lang = 'ru') {
         if($id){
             return $res = DB::select()
                 ->from(self::MENU)
@@ -15,10 +15,11 @@ class Model_Admin_Menu extends Model {
         } else {
             return $res = DB::select()
                 ->from(self::MENU)
+                ->order_by(self::MENU.'.sort', 'ASC')
                 ->join(self::MENU_DESC)
                 ->on(self::MENU.'.'.self::ID_MENU, '=', self::MENU_DESC.'.'.self::ID_MENU)
-                ->where(self::MENU_DESC.'.lang', '=', 'ru')
-                ->as_assoc()->execute();
+                ->where(self::MENU_DESC.'.lang', '=', $lang)
+                ->as_assoc()->execute()->as_array();
         }
     }
 
@@ -108,6 +109,11 @@ class Model_Admin_Menu extends Model {
                 }
                 return TRUE;
             } else {
+                $sort = DB::select(array(DB::expr('MAX(sort)'), 'p'))->from(self::MENU)->execute()->get('p');
+
+                $key_arr[0] = 'sort';
+                $val_arr[0] = $sort;
+
                 foreach ($data['main'] as $key => $val) {
                     $key_arr[] = $key;
                     $val_arr[] = $val;
@@ -143,6 +149,28 @@ class Model_Admin_Menu extends Model {
             return $res;
         }
         return FALSE;
+    }
+
+    public function up($id) {
+        $sort = DB::select('sort')->from(self::MENU)->where(self::ID_MENU, '=', $id)->execute()[0]['sort'];
+
+        $data['sort'] = $sort-1;
+        if(!DB::update(self::MENU)->set($data)->where(self::ID_MENU, '=', $id)->execute()){ return FALSE; }
+
+        $id = DB::select(self::ID_MENU)->from(self::MENU)->where('sort', '=', $data['sort'])->execute()[0][self::ID_MENU];
+        $data['sort'] = $sort;
+        if(!DB::update(self::MENU)->set($data)->where(self::ID_MENU, '=', $id)->execute()) { return FALSE; }
+    }
+
+    public function down($id) {
+        $sort = DB::select('sort')->from(self::MENU)->where(self::ID_MENU, '=', $id)->execute()[0]['sort'];
+
+        $data['sort'] = $sort+1;
+        if(!DB::update(self::MENU)->set($data)->where(self::ID_MENU, '=', $id)->execute()) { return FALSE; }
+
+        $id = DB::select(self::ID_MENU)->from(self::MENU)->where('sort', '=', $data['sort'])->execute()[0][self::ID_MENU];
+        $data['sort'] = $sort;
+        if(!DB::update(self::MENU)->set($data)->where(self::ID_MENU, '=', $id)->execute()) { return FALSE; }
     }
 
 }

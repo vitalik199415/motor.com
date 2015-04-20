@@ -1302,12 +1302,29 @@ color: #333;
 	
 }
 
-
 .thumbnail img {
 	display: inline-block;
 	height: auto;
 	max-width: 100%;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+a.sort_up {
+	background: url("/img/system/sort_up.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+	cursor: pointer;
+	display: inline-block;
+	height: 22px;
+	width: 22px;
+	margin: 0 2px;
+}
+
+a.sort_down {
+	background: url("/img/system/sort_down.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+	cursor: pointer;
+	display: inline-block;
+	height: 22px;
+	width: 22px;
+	margin: 0 2px;
 }
 

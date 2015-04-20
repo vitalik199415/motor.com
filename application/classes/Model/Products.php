@@ -89,17 +89,26 @@ class Model_Products extends Model {
         }
     }
 
-    public function products_count($param, $brand = FALSE, $category = FALSE) {
+    public function products_count($param, $brand = FALSE, $category = FALSE, $q = FALSE, $lang = FALSE) {
         switch($param) {
             case 'new': $res = DB::select(array(DB::expr('COUNT(`'.self::PRODUCTS.'`.`'.self::ID_PRODUCTS.'`)'), 'total'))
                                 ->from(self::PRODUCTS)
-                                ->where(self::PRODUCTS.'.sale', '=', 1)
+                                ->where(self::PRODUCTS.'.new', '=', 1)
                                 ->execute();
                         return $res[0];
                         break;
             case 'sale': $res = DB::select(array(DB::expr('COUNT(`'.self::PRODUCTS.'`.`'.self::ID_PRODUCTS.'`)'), 'total'))
                                 ->from(self::PRODUCTS)
                                 ->where(self::PRODUCTS.'.sale', '=', 1)
+                                ->execute();
+                        return $res[0];
+                        break;
+            case 'find': $res = DB::select(array(DB::expr('COUNT(`'.self::PRODUCTS.'`.`'.self::ID_PRODUCTS.'`)'), 'total'))
+                                ->from(self::PRODUCTS)
+                                ->join(self::PRODUCTS_DESC)
+                                ->on(self::PRODUCTS.'.'.self::ID_PRODUCTS, '=', self::PRODUCTS_DESC.'.'.self::ID_PRODUCTS)
+                                ->where(self::PRODUCTS_DESC.'.lang', '=', $lang)
+                                ->where(self::PRODUCTS_DESC.'.name', 'RLIKE', $q)
                                 ->execute();
                         return $res[0];
                         break;
@@ -114,7 +123,7 @@ class Model_Products extends Model {
                                 ->on(self::CATEGORIES . '.' . self::ID_CATEGORIES, '=', self::CAT_PROD . '.' . self::ID_CATEGORIES)
                                 ->where(self::CAR_BRANDS . '.url', '=', $brand)
                                 ->where(self::CATEGORIES . '.url', '=', $category)
-                                ->where(self::PRODUCTS.'.sale', '=', 1)
+                                ->as_assoc()
                                 ->execute();
                             return $res[0];
                         } else
@@ -124,13 +133,13 @@ class Model_Products extends Model {
                                     ->join(self::CAR_BRANDS)
                                     ->on(self::PRODUCTS.'.'.self::ID_CAR_BRANDS, '=', self::CAR_BRANDS.'.'.self::ID_CAR_BRANDS)
                                     ->where(self::CAR_BRANDS.'.url', '=', $brand)
-                                    ->where(self::PRODUCTS.'.sale', '=', 1)
+                                    ->as_assoc()
                                     ->execute();
                                 return $res[0];
                             } else {
                                 $res = DB::select(array(DB::expr('COUNT(`'.self::PRODUCTS.'`.`'.self::ID_PRODUCTS.'`)'), 'total'))
                                     ->from(self::PRODUCTS)
-                                    ->where(self::PRODUCTS.'.sale', '=', 1)
+                                    ->as_assoc()
                                     ->execute();
                                 return $res[0];
                             }
@@ -139,7 +148,7 @@ class Model_Products extends Model {
 
     }
 
-    public function new_products($lang) {
+    public function new_products($start, $limit, $lang) {
 
         $columns = array(
             self::PRODUCTS.'.'.self::ID_PRODUCTS,
@@ -163,12 +172,14 @@ class Model_Products extends Model {
             ->where(self::PRODUCTS_DESC.'.lang', '=', $lang)
             ->where(self::PRODUCTS.'.new', '=', 1)
             ->where(self::PRODUCTS_IMG.'.preview', '=', 1)
+            ->offset($start)
+            ->limit($limit)
             ->as_assoc()
             ->execute();
         return $res;
     }
 
-    public function sale_products($lang) {
+    public function sale_products($start, $limit, $lang) {
 
         $columns = array(
             self::PRODUCTS.'.'.self::ID_PRODUCTS,
@@ -190,6 +201,36 @@ class Model_Products extends Model {
             ->on(self::PRODUCTS.'.'.self::ID_PRODUCTS, '=', self::PRODUCTS_IMG.'.'.self::ID_PRODUCTS)
             ->where(self::PRODUCTS_DESC.'.lang', '=', $lang)
             ->where(self::PRODUCTS.'.sale', '=', 1)
+            ->where(self::PRODUCTS_IMG.'.preview', '=', 1)
+            ->offset($start)
+            ->limit($limit)
+            ->as_assoc()
+            ->execute();
+        return $res;
+    }
+
+    public function find_products($q, $lang) {
+        $columns = array(
+            self::PRODUCTS.'.'.self::ID_PRODUCTS,
+            self::PRODUCTS.'.sku',
+            self::PRODUCTS.'.price',
+            self::PRODUCTS.'.in_stock',
+            self::PRODUCTS.'.new',
+            self::PRODUCTS.'.sale',
+            self::PRODUCTS_DESC.'.name',
+            self::PRODUCTS_DESC.'.short_description',
+            self::PRODUCTS_IMG.'.image'
+        );
+
+        $res = DB::select_array($columns)
+            ->distinct(TRUE)
+            ->from(self::PRODUCTS)
+            ->join(self::PRODUCTS_DESC)
+            ->on(self::PRODUCTS.'.'.self::ID_PRODUCTS, '=', self::PRODUCTS_DESC.'.'.self::ID_PRODUCTS)
+            ->join(self::PRODUCTS_IMG)
+            ->on(self::PRODUCTS.'.'.self::ID_PRODUCTS, '=', self::PRODUCTS_IMG.'.'.self::ID_PRODUCTS)
+            ->where(self::PRODUCTS_DESC.'.name', 'RLIKE', $q)
+            ->where(self::PRODUCTS_DESC.'.lang', '=', $lang)
             ->where(self::PRODUCTS_IMG.'.preview', '=', 1)
             ->as_assoc()
             ->execute();

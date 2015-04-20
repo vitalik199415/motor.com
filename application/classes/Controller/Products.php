@@ -2,10 +2,12 @@
 
 class Controller_Products extends Controller_Base {
 
+    private $brands;
     private $prod_model;
     private $category;
 
     public function before() {
+        $this->brands = Model::factory('Brands');
         $this->prod_model = Model::factory('Products');
         $this->category = Model::factory('Categories');
         parent::before();
@@ -20,17 +22,24 @@ class Controller_Products extends Controller_Base {
 
         if($brand && $cat) {
             $data = $this->build_pagination($targetpage, $page, $brand, $cat);
+            $this->template->title = $this->brands->get_brand_info($brand, $this->lang)['name'].'/'.$this->category->get_cat_info($cat, $this->lang)['name'];
         } else
             if($brand) {
                 $data = $this->build_pagination($targetpage, $page, $brand);
+                $this->template->title = $this->brands->get_brand_info($brand, $this->lang)['name'];
             } else {
             $data = $this->build_pagination($targetpage, $page);
+                $this->template->title = 'Products';
         }
+
         $data['title'] = $this->category->get_cat_info($cat, $this->lang)['name'];
-        $data['categories'] = $this->category->get_cat($this->lang);
-        $data['brands'] = Model::factory('Brands')->get_brands($this->lang);
+//        $data['categories'] = $this->category->get_cat($this->lang);
+        $data['categories'] = Controller_Menu::build_menu($this->lang);
+        $data['brands'] = $this->brands->get_brands($this->lang);
+        $data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
         $data['curr'] = Model::factory('Admin_Currency')->get_currency_info($this->currency);
-        $this->template->left_sidebar = View::factory('front/left_sidebar', $data);
+
+        $this->template->left_sidebar = View::factory('front/left_block', $data);
         $this->template->content = View::factory('front/products', $data);
         $this->template->title = $data['title'];
     }
@@ -65,7 +74,6 @@ class Controller_Products extends Controller_Base {
         $next = $page + 1;
         $lastpage = ceil($total_pages / $limit);
         $LastPagem1 = $lastpage - 1;
-
 
 //        <ul class="pagination">
 //            <li class="active"><a href="">1</a></li>

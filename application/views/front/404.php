@@ -1,48 +1,54 @@
 <!DOCTYPE html>
-<html lang="ru">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="ru"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="ru"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="ru"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="ru"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сраница ошибки 404</title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>404! Страница не найдена</title>
-    <link href="<?=URL::base();?>css/front/bootstrap.min.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/font-awesome.min.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/prettyPhoto.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/price-range.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/animate.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/main.css" rel="stylesheet">
-    <link href="<?=URL::base();?>css/front/responsive.css" rel="stylesheet">
-
-    <script src="<?=URL::base();?>js/jquery-1.11.2.min.js"></script>
-
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="<?=URL::base();?>css/front/404.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="<?=URL::base();?>js/front/html5shiv.js"></script>
-    <script src="<?=URL::base();?>js/front/respond.min.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="<?=URL::base();?>img/favicon.ico">
-    <!--    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">-->
-    <!--    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">-->
-    <!--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">-->
-    <!--    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">-->
-</head><!--/head-->
-
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
 <body>
+<div class="comingcontainer">
+    <div class="checkbacksoon">
+        <p>
+            <span class="go3d">4</span>
+            <span class="go3d">0</span>
+            <span class="go3d">4</span>
+            <span class="go3d">!</span>
 
-<div class="container text-center">
-    <div class="content-404">
-        <img src="<?=URL::base();?>img/system/404.png" class="img-responsive" alt="404" />
-        <h1><b>OPPS!</b> <?=__('We Couldn’t Find this Page')?></h1>
-        <p><?=__('Uh... So it looks like you brock something.').__('The page you are looking for has up and Vanished')?></p>
-        <h2><a href="<? header("Location: ". $_SERVER['HTTP_REFERER'])?>"><?=__('Bring me back')?></a></h2>
+        </p>
+
+        <p class="error">
+            Похоже, вы выбрали неправильный путь.<br> Не волнуйтесь, время от времени, это случается с каждым из нас.<br>
+            Поисковая форма и ссылки ниже, помогут вам встать на путь истинный.</p>
+        <form action="" method="post" class="search">
+            <input type="search" name="" placeholder="поиск" class="input" />
+            <input type="submit" name="" value="" class="submit" />
+        </form>
+        <nav>
+            <ul>
+                <li><a href="<?=URL::base();?>"><?=__('Home')?></a></li>
+                <li><a href="<?=URL::set_url('page/about')?>"><?=__('About')?></a></li>
+                <li><a href="<?=URL::set_url('contact')?>"><?=__('Contact')?></a></li>
+                <li><a href="<?=URL::set_url('products')?>"><?=__('Products')?></a></li>
+                <!--<li><a href="#">Поддержка</a></li>-->
+            </ul>
+        </nav>
+
     </div>
 </div>
-
-<script src="<?=URL::base();?>js/front/bootstrap.min.js"></script>
-<script src="<?=URL::base();?>js/front/jquery.scrollUp.min.js"></script>
-<script src="<?=URL::base();?>js/front/price-range.js"></script>
-<script src="<?=URL::base();?>js/front/jquery.prettyPhoto.js"></script>
-<script src="<?=URL::base();?>js/front/main.js"></script>
 
 </body>
 </html>

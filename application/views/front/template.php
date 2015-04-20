@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php if(isset($description)) { echo $description;};?>">
+    <meta name="keywords" content="<?php if(isset($keywords)) { echo $keywords;};?>">
     <meta name="author" content="">
     <title><?php if(isset($title)) { echo __($title);};?></title>
     <link href="<?=URL::base();?>css/front/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +38,11 @@
             <div class="row">
                 <?php if(isset($left_sidebar)) { echo $left_sidebar;};?>
                 <?php if(isset($content)) { echo $content;};?>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <?php if(isset($profiler)) { echo $profiler;};?>
             </div>
         </div>
     </section>

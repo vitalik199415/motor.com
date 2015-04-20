@@ -3,5 +3,5 @@
 return array(
 	'lang' => 'ru',
 	'currency' => 'USD',
-	'product_limit' => 9,
+	'product_limit' => 1,
 );

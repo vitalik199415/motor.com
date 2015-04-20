@@ -14,7 +14,12 @@ class Model_Categories extends Model {
             ->where(self::CATEGORIES_DESC . '.lang', '=', $lang)
             ->as_assoc()->execute();
 
-        return $res;
+        foreach($res as $r){
+            $cats_ID[$r[self::ID_CATEGORIES]][] = $r;
+            $cats[$r['id_parent']][] =  $r;
+        }
+
+        return $cats;
     }
 
     public function get_cat_info($url ,$lang) {

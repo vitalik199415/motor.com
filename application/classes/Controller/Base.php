@@ -49,7 +49,29 @@ abstract class Controller_Base extends Controller_Template {
         $this->template->title = 'Motor.COM';
 
         $this->template->header = View::factory('front/header', $data);
+        $this->template->profiler = View::factory('profiler/stats');
         $this->template->footer = View::factory('front/footer');
+    }
+
+    public static function build_tree($cats,$parent_id, $url, $only_parent = false){
+        if(is_array($cats) and isset($cats[$parent_id])){
+            $tree = '<ul>';
+            if($only_parent==false){
+                foreach($cats[$parent_id] as $cat){
+                    $tree .= '<li><a href="'.URL::set_url('products/'.$url.'/'.$cat['url']).'">'.$cat['name'];
+                    $tree .=  build_tree($cats,$cat['id_parent'], $url);
+                    $tree .= '</a></li>';
+                }
+            }elseif(is_numeric($only_parent)){
+                $cat = $cats[$parent_id][$only_parent];
+                $tree .= '<li>'.$cat['name'].' #'.$cat['id'];
+                $tree .=  build_tree($cats,$cat['id'], $url);
+                $tree .= '</li>';
+            }
+            $tree .= '</ul>';
+        }
+        else return null;
+        return $tree;
     }
 
     public static function set_url($url) {

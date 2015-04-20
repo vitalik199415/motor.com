@@ -87,7 +87,7 @@ return array(
     'We Couldn’t Find this Page' => 'Ми не змогли знайти потрібну сторінку',
     'Uh... So it looks like you brock something.' => 'Хм... схоже Ви щось пропустили.',
     'The page you are looking for has up and Vanished' => 'Сторінка, яку ви шукаєте кудась пропала.',
-    'Bring me back' => 'Повернутись назад',
+    'Bring me back to home' => 'Повернутись на головну',
 
     //Products page
     'Not available'         => 'Немає в наявності',
@@ -98,4 +98,9 @@ return array(
     'New products'          => 'Нові товари',
     'Availability'          => 'Наявність',
     'Quantity'              => 'Кількість',
+
+    'News per page'         => 'Новин на сторінку',
+    'Read more'             => 'Читати далі',
+
+    'Page not found'        => 'Сторінку не знайдено',
 );

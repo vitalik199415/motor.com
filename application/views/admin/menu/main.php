@@ -36,11 +36,11 @@
                             <table id="example" class="table table-striped table-bordered" >
                                 <thead>
                                 <tr>
-                                    <th> ID </th>
-                                    <th> Название </th>
-                                    <th> Родительское меню </th>
-                                    <th> URL </th>
+                                    <th> Позиция: </th>
+                                    <th> Название: </th>
+                                    <th> URL: </th>
                                     <th> Активность: </th>
+                                    <th>  </th>
                                     <th class="td-actions"> Действия </th>
                                 </tr>
                                 </thead>
@@ -48,11 +48,14 @@
                                 <? if(isset($main))
                                     foreach($main as $row):?>
                                         <tr >
-                                            <td style="text-align: center;"> <?=$row['id_menu']?> </td>
+                                            <td style="text-align: center;"> <?=$row['sort']?> </td>
                                             <td style="text-align: center;"> <?=$row['title']?> </td>
-                                            <td style="text-align: center;"> <?=$row['id_parent']?> </td>
                                             <td style="text-align: center;"> <?=$row['url']?> </td>
                                             <td style="text-align: center;"> <? if($row['active'] == 1) echo 'Да'; else echo 'Нет';?> </td>
+                                            <td style="text-align: center;">
+                                                <a href="<?=URL::set_url('admin/menu/up/'.$row['id_menu']);?>" class="sort_up"></a>
+                                                <a href="<?=URL::set_url('admin/menu/down/'.$row['id_menu']);?>" class="sort_down"></a>
+                                            </td>
                                             <td class="td-actions" style="text-align: center;">
                                                 <a href="<?=URL::set_url('admin/menu/edit/'.$row['id_menu']);?>" class="btn btn-small btn-success"><i class="btn-icon-only icon-edit"> </i></a>
                                                 <a href="<?=URL::set_url('admin/menu/delete/'.$row['id_menu']);?>" class="btn btn-danger btn-small" id="delete"><i class="btn-icon-only icon-remove"> </i></a>

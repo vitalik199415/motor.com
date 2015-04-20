@@ -8,10 +8,14 @@ class Controller_Main extends Controller_Base {
 
 	public function action_index()
 	{
-		$data['categories'] = Model::factory('Categories')->get_cat($this->lang);
-		$data['brands'] = Model::factory('Brands')->get_brands($this->lang);
-		$this->template->left_sidebar = View::factory('front/left_sidebar', $data);
-		$this->template->content = hashD('user', 2).'|'.sha1('azaza');
+//		$data['categories'] = Model::factory('Categories')->get_cat($this->lang);
+		$data['categories'] = Controller_Menu::build_menu($this->lang);
+
+//		$data['brands'] = Model::factory('Brands')->get_brands($this->lang);
+		$data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
+
+		$this->template->left_sidebar = View::factory('front/left_block', $data);
+		$this->template->content = View::factory('front/main');
 	}
 
 } // End Main
