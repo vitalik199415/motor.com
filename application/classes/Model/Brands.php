@@ -12,6 +12,7 @@ class Model_Brands extends Model {
             ->join(self::BRANDS_DESC)
             ->on(self::BRANDS . '.' . self::ID_BRANDS, '=', self::BRANDS_DESC . '.' . self::ID_BRANDS)
             ->where(self::BRANDS_DESC . '.lang', '=', $lang)
+            ->where(self::BRANDS . '.active', '=', 1)
             ->as_assoc()->execute();
 
         return $res;
@@ -24,6 +25,7 @@ class Model_Brands extends Model {
             ->on(self::BRANDS . '.' . self::ID_BRANDS, '=', self::BRANDS_DESC . '.' . self::ID_BRANDS)
             ->where(self::BRANDS_DESC . '.lang', '=', $lang)
             ->where(self::BRANDS . '.url', '=', $url)
+            ->where(self::BRANDS . '.active', '=', 1)
             ->as_assoc()->execute();
 
         return $res[0];

@@ -37,7 +37,7 @@ class Controller_Login extends Controller_Base {
             if ($status)
             {
                 // Отправляем пользователя на главную страницу
-                $this->redirect(URL::set_url('/'));
+                $this->redirect(URL::set_url('profile'));
             }
             else
             {

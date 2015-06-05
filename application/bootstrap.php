@@ -223,15 +223,22 @@ Route::set('login', 'login(/<action>(/<param>))')
 		'action' => 'index'
 	));
 
+Route::set('profile', 'profile(/<action>(/<param>))')
+	->defaults(array(
+		'controller' => 'profile',
+		'action' => 'index'
+	));
+
 Route::set('register', 'register(/<action>(/<param>))')
 	->defaults(array(
 		'controller' => 'register',
 		'action' => 'index'
 	));
 
-Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
+Route::set('error', 'cart(/<action>(/<id>))')
 	->defaults(array(
-		'controller' => 'error',
+		'controller' => 'cart',
+		'action'	 => 'index'
 	));
 
 Route::set('default', '(<controller>(/<param>))', array('lang' => '(en|ru|ua)'))

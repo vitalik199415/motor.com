@@ -7,22 +7,12 @@
                     <h4 class="panel-title"><a href="<?/*=URL::set_url('products')*/?>"><?/*=__('Products')*/?></a></h4>
                 </div>
             </div>-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><a href="<?=URL::set_url('new')?>"><?=__('New')?></a></h4>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title"><a href="<?=URL::set_url('sale')?>"><?=__('Sale')?></a></h4>
-                </div>
-            </div>
             <div class="panel panel-default" id="category">
                 <div class="panel-heading">
                     <h4 class="panel-title">
+                        <a href="<?=URL::set_url('products')?>"><?=__('Products')?></a>
                         <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                            <?=__('Categories')?>
                         </a>
                     </h4>
                 </div>
@@ -32,6 +22,16 @@
                             <?=@$categories?>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a href="<?=URL::set_url('new')?>"><?=__('New')?></a></h4>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a href="<?=URL::set_url('sale')?>"><?=__('Sale')?></a></h4>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -57,3 +57,23 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+
+        $("span.badge").click(function(){
+            if($(this).find(':first-child').hasClass('fa-plus')) {
+                $(this).find(':first-child').removeClass('fa-plus').addClass('fa-minus');
+            } else {
+                $(this).find(':first-child').removeClass('fa-minus').addClass('fa-plus');
+            }
+        });
+
+        /*$('.fa-plus').click(function(){
+            $(this).removeClass('fa-plus').addClass('fa-minus');
+        });
+
+        $(document).on('click', 'i.fa-minus', function() {
+            $(this).removeClass('fa-minus').addClass('fa-plus');
+        });*/
+    });
+</script>

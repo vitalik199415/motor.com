@@ -62,24 +62,24 @@
                     <div class="shop-menu pull-right">
                         <? if(isset($login)): ?>
                             <ul class="nav navbar-nav">
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> <?=__('Cart')?></a></li>
+                                <li><a href="<?=URL::set_url('cart')?>"><i class="fa fa-shopping-cart"></i> <?=__('Cart')?></a></li>
                                 <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?=$login?></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="<?=URL::set_url('profile/'.$login)?>"><i class="fa fa-user"></i> <?=__('Account')?></a></li>
+                                    <ul class="dropdown-menu user-menu">
+                                        <li><a href="<?=URL::set_url('profile')?>"><i class="fa fa-user"></i> <?=__('Account')?></a></li>
                                         <? if(isset($admin)): ?>
-                                            <li><a href="<?=URL::set_url('admin')?>"><i class="fa"></i> <?=__('Admin page')?></a></li>
+                                            <li><a href="<?=URL::set_url('admin')?>"><i class="fa fa-dashboard"></i> <?=__('Admin page')?></a></li>
                                         <? endif; ?>
-                                        <li><hr></li>
-                                        <li><a href="<?=URL::set_url('login/logout')?>"><i class="fa fa-"></i> <?=__('Logout')?></a></li>
+
+                                        <li><a href="<?=URL::set_url('login/logout')?>"><i class="fa fa-sign-out"></i> <?=__('Logout')?></a></li>
                                     </ul>
                                 </li>
                             </ul>
                         <? else: ?>
                             <ul class="nav navbar-nav">
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> <?=__('Cart')?></a></li>
+                                <li><a href="<?=URL::set_url('cart')?>"><i class="fa fa-shopping-cart"></i> <?=__('Cart')?></a></li>
                                 <li><a href="<?=URL::set_url('register')?>"><i class="fa fa-user-plus"></i> <?=__('Register')?></a></li>
-                                <li><a href="<?=URL::set_url('login')?>"><i class="fa fa-lock"></i> <?=__('Login')?></a></li>
+                                <li><a href="<?=URL::set_url('login')?>"><i class="fa fa-sign-in"></i> <?=__('Enter')?></a></li>
                             </ul>
                         <? endif; ?>
                     </div>

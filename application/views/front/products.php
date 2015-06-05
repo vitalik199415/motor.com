@@ -2,6 +2,15 @@
     <div class="features_items"><!--features_items-->
         <h2 class="title text-center"><?=__($title)?></h2>
         <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <center>
+                    <? if(isset($image)): ?>
+                    <img src="<?=$image?>" width="300px" style="margin-bottom: 10px"/>
+                    <? endif; ?>
+                </center>
+            </div>
+        </div>
+        <div class="row limit">
             <div class="col-sm-12">
                 <div class="btn-group product-limit">
                     <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown" title="<?=__('Currency');?>">
@@ -22,7 +31,7 @@
         </div>
         <div class="row">
             <? foreach($products as $product): ?>
-                <div class="col-sm-4">
+                <div class="col-sm-4 product-item">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
@@ -35,8 +44,8 @@
                                 </center>
                                 <h2><a href="<?=URL::set_url('detail/').$product['id_products']?>"><?=$product['name']?></a></h2>
                                 <h4 style="color: #0052A4"><?=$product['in_stock'] ? __('In stock') : __('Not available');?></h4>
-                                <h3><?=$product['price']*$curr['rate'].' '.$curr['name']?> </h3>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><?=__('Add to cart')?></a>
+                                <h3 <?  if($product['in_stock']):?> style="color: #161616" <? else: ?> style="color: #464646" <? endif; ?>><?=$product['price']*$curr['rate'].' '.$curr['name']?> </h3>
+                                <a href="<?=URL::set_url('cart/add/').$product['id_products']?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><?=__('Add to cart')?></a>
                             </div>
                             <? if($product['new']): ?>
                                 <img src="/img/home/label_new.png" class="new" alt="" />

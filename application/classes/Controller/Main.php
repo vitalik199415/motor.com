@@ -13,9 +13,10 @@ class Controller_Main extends Controller_Base {
 
 //		$data['brands'] = Model::factory('Brands')->get_brands($this->lang);
 		$data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
+		$data['brands'] = Model::factory('Brands')->get_brands($this->lang);
 
 		$this->template->left_sidebar = View::factory('front/left_block', $data);
-		$this->template->content = View::factory('front/main');
+		$this->template->content = View::factory('front/main', $data);
 	}
 
 } // End Main

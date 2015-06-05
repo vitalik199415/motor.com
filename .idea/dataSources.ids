@@ -830,6 +830,17 @@
       <primary-key name="PRIMARY" columns="id_car_brands_description"/>
       <foreign-key name="car_brands_description_ibfk_1" columns="id_car_brands" ref-table="car_brands" ref-schema="" ref-catalog="motor_com" ref-columns="id_car_brands" update-rule="0" delete-rule="0" deferrability="2"/>
     </table>
+    <table name="cart" schema="" catalog="motor_com" type="TABLE">
+      <column name="id_cart" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="session_id" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="qty" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_cart"/>
+      <foreign-key name="cart_ibfk_1" columns="product_id" ref-table="products" ref-schema="" ref-catalog="motor_com" ref-columns="id_products" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="cart_ibfk_2" columns="user_id" ref-table="users" ref-schema="" ref-catalog="motor_com" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="user_id" unique="false" columns="product_id"/>
+    </table>
     <table name="categories" schema="" catalog="motor_com" type="TABLE">
       <column name="id_categories" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="id_parent" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
@@ -890,6 +901,7 @@
       <column name="id_menu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="id_parent" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="url" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12" def="JyMn"/>
+      <column name="sort" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="active" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
       <primary-key name="PRIMARY" columns="id_menu"/>
       <exported-key name="menu_description_ibfk_1" table="menu_description" schema="" catalog="motor_com" columns="id_menu"/>
@@ -964,6 +976,7 @@
       <column name="sale" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="id_products"/>
       <foreign-key name="products_ibfk_1" columns="id_car_brands" ref-table="car_brands" ref-schema="" ref-catalog="motor_com" ref-columns="id_car_brands" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="cart_ibfk_1" table="cart" schema="" catalog="motor_com" columns="product_id"/>
       <exported-key name="categories_products_ibfk_1" table="categories_products" schema="" catalog="motor_com" columns="id_products"/>
       <exported-key name="products_description_ibfk_1" table="products_description" schema="" catalog="motor_com" columns="id_products"/>
       <exported-key name="products_images_ibfk_1" table="products_images" schema="" catalog="motor_com" columns="id_products"/>
@@ -1031,13 +1044,25 @@
       <column name="email" sqlType="VARCHAR" precision="254" scale="0" nullable="false" jdbcType="12"/>
       <column name="username" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="password" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_admin" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="logins" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="last_login" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="cart_ibfk_2" table="cart" schema="" catalog="motor_com" columns="user_id"/>
       <exported-key name="roles_users_ibfk_1" table="roles_users" schema="" catalog="motor_com" columns="user_id"/>
       <exported-key name="user_tokens_ibfk_1" table="user_tokens" schema="" catalog="motor_com" columns="user_id"/>
+      <exported-key name="users_data_ibfk_1" table="users_data" schema="" catalog="motor_com" columns="id"/>
       <index name="uniq_email" unique="true" columns="email"/>
       <index name="uniq_username" unique="true" columns="username"/>
+    </table>
+    <table name="users_data" schema="" catalog="motor_com" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="fname" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sname" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" precision="13" scale="0" nullable="false" jdbcType="12"/>
+      <foreign-key name="users_data_ibfk_1" columns="id" ref-table="users" ref-schema="" ref-catalog="motor_com" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
     </table>
     <table name="columns_priv" schema="" catalog="mysql" type="SYSTEM TABLE">
       <column name="Host" sqlType="CHAR" precision="60" scale="0" nullable="false" jdbcType="1" def="Jyc="/>

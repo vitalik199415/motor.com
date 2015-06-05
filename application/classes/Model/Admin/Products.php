@@ -156,10 +156,28 @@ class Model_Admin_Products extends Model {
                         if(!DB::insert(self::PRODUCTS_IMG, $key_arr)->values($val_arr)->execute())
                             Message::add_error('Ошибка записи в базу данных!');
                     } else {
-                        Message::add_error('Ошибка загрузки файла');
+                        $new = '/img/system/no image.png';
+
+                        $key_arr[0] = 'id_products';
+                        $key_arr[1] = 'image';
+                        $val_arr[0] = $id;
+                        $val_arr[1] = $new;
+                        if(!DB::insert(self::PRODUCTS_IMG, $key_arr)->values($val_arr)->execute())
+                            Message::add_error('Ошибка записи в базу данных!');
+                        //Message::add_error('Ошибка загрузки файла');
                     }
                 } else {
-                    Message::add_error('Ошибка загрузки файла');
+                    $new = '/img/system/no image.png';
+
+                    $key_arr[0] = 'id_products';
+                    $key_arr[1] = 'image';
+                    $key_arr[2] = 'preview';
+                    $val_arr[0] = $id;
+                    $val_arr[1] = $new;
+                    $val_arr[2] = 1;
+                    if(!DB::insert(self::PRODUCTS_IMG, $key_arr)->values($val_arr)->execute())
+                        Message::add_error('Ошибка записи в базу данных!');
+                    //Message::add_error('Ошибка загрузки файла');
                 }
             }
         }
@@ -223,6 +241,7 @@ class Model_Admin_Products extends Model {
     public function del_img($id) {
         if($id) {
             $res = DB::select()->from(self::PRODUCTS_IMG)->where(self::ID_PRODUCTS_IMG, '=', $id)->execute();
+            //$img = explode('/', $res[0]['image']);
             unlink($res[0]['image']);
             $res = DB::delete(self::PRODUCTS_IMG)->where(self::ID_PRODUCTS_IMG, '=', $id)->execute();
             return $res;

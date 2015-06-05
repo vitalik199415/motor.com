@@ -1328,3 +1328,7 @@ a.sort_down {
 	margin: 0 2px;
 }
 
+
+.dataTables_wrapper div#example_paginate.dataTables_paginate a.paginate-button {
+	margin-left: 5px;
+}

@@ -110,7 +110,7 @@ class Controller_Admin_Products extends Controller_Admin_Base {
                 $this->redirect('admin/products');
             } else {
                 Message::add_success('Товар успешно удалено!');
-                $this->redirect('admin/');
+                $this->redirect('admin/products');
             }
         } else {
             Message::add_error('Параметр ID не установлено, удаление не возможно!');

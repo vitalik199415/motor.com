@@ -28,6 +28,7 @@ return array(
     'Required field'                        => 'Поле обов’язкове для заповнення',
     'Field must be email'                   => 'Поле повинно бути електронним адресом',
     'Password must be matched'              => 'Паролі повинні співпадати',
+    'Minimum length field of 6 characters' => 'Мінімальна довжина поля 6 символів',
 
 
 
@@ -46,10 +47,12 @@ return array(
     'Login or Email'    => 'Логін або електронна пошта',
     'Email Address'     => 'Адрес електронної пошти',
     'Keep me signed in' => 'Запам’ятати мене',
-    'Login'             => 'Увійти',
+    'Login'             => 'Логін',
     'Enter'             => 'Увійти',
     'OR'                => 'АБО',
     'New User Signup!'  => 'Реєстрація нового користувача',
+    'Basic data'        => 'Основні дані',
+    'User data'         => 'Дані користувача',
     'Password'          => 'Пароль',
     'Repeat password'   => 'Повторіть пароль',
     'Signup'            => 'Зареєструватись',
@@ -73,6 +76,7 @@ return array(
     'Cart'              => 'Корзина',
     'All rights reserved' => 'Всі права захищено',
     'Admin page'        => 'Сторінка адміністратора',
+    'Logout'            => 'Вихід',
 
     //Contact page
     'Subject'           => 'Тема повідомлення',
@@ -82,6 +86,13 @@ return array(
     'Get In Touch'      => 'Зв’язатися',
     'Contact Info'      => 'Контактна інформація',
     'Social Networking' => 'Ми в соцмережах',
+
+    //Profile page
+    'First Name'        => 'Ім`я',
+    'Second Name'       => 'Прізвище',
+    'City'              => 'Місто',
+    'Address'           => 'Адрес',
+    'Phone'             => 'Телефон',
 
     //404 page
     'We Couldn’t Find this Page' => 'Ми не змогли знайти потрібну сторінку',
@@ -103,4 +114,36 @@ return array(
     'Read more'             => 'Читати далі',
 
     'Page not found'        => 'Сторінку не знайдено',
+    'Save'                  => 'Зберегти',
+
+    'Search'                => 'Пошук',
+
+    //Cart page
+    'Price'                 => 'Ціна',
+    'Total'                 => 'Сума',
+    'Product'               => 'Товар',
+    'Confirm order'               => 'Підтвердити замовлення',
+
+    'Error deleting product from cart'  => 'Помилка при видаленні товару з корзини',
+    'Product deleted from cart'         => 'Товар видалено з корзини',
+    'Product added to cart'             => 'Товар додано до корзини',
+    'Error adding product to cart'      => 'Помилка додавання товару до корзини',
+    'Product already in cart'           => 'Товар вже є в корзині',
+    'The quantity of product increased' => 'Кількість товару збільшено',
+    'Error by increasing the amount of product' => ' Помилка при збільшенні кількості товару',
+    'The quantity of product reduced' => 'Кількість товару зменшено',
+    'Error by reducing the amount of product' => 'Помилка при зменшенні кількості товару',
+    'Error. ID parameter is not set' => 'Помилка. Параметр ’ID’ не встановлено',
+    'Do you really want to remove product from cart?' => 'Ви дійсно хочете видалити товар з корзини?',
+    'Edit' => 'Редагувати',
+
+    'Error saving data' => 'Помилка при збереженні даних',
+    'Changes saved successfully' => 'Зміни успішно збережено',
+    'Brands' => 'Марки',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
+    '' => '',
 );

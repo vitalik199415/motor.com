@@ -6,6 +6,7 @@ abstract class Controller_Base extends Controller_Template {
     public $session;
     public $auth;
     public $currency;
+    public $user_id;
     public $template = 'front/template';
 
     public function before()
@@ -15,6 +16,7 @@ abstract class Controller_Base extends Controller_Template {
         $this->session = Session::instance();
         $this->auth = Auth::instance();
         $config = Kohana::$config->load('config');
+
 
         if($this->session->get('lang') != '') {
             I18n::lang($this->session->get('lang'));
@@ -39,6 +41,22 @@ abstract class Controller_Base extends Controller_Template {
 
         if ($this->auth->logged_in() != 0) {
             $data['login'] = $this->auth->get_user()->username;
+            $this->user_id = $this->auth->get_user()->id;
+        }
+
+        if ($this->session->get('InfoMess')) {
+            $this->template->info = $this->session->get('InfoMess');
+            $this->session->delete('InfoMess');
+        }
+
+        if ($this->session->get('SuccessMess')) {
+            $this->template->success = $this->session->get('SuccessMess');
+            $this->session->delete('SuccessMess');
+        }
+
+        if ($this->session->get('ErrMess')) {
+            $this->template->error = $this->session->get('ErrMess');
+            $this->session->delete('ErrMess');
         }
 
         $data['langs'] = Model::factory('Admin_Langs')->get_active_langs();
@@ -46,10 +64,14 @@ abstract class Controller_Base extends Controller_Template {
         $data['currency'] = Model::factory('Admin_Currency')->get_active_currency();
         $data['curr'] = Model::factory('Admin_Currency')->get_currency_info($this->currency);
 
+        $data['menu'] = Model::factory('Admin_Menu')->get_all_menu(FALSE, $this->lang);
+        $data['categories'] = Controller_Menu::build_menu($this->lang);
+
         $this->template->title = 'Motor.COM';
 
         $this->template->header = View::factory('front/header', $data);
-        $this->template->profiler = View::factory('profiler/stats');
+        $this->template->left_sidebar = View::factory('front/left_block', $data);
+        //$this->template->profiler = View::factory('profiler/stats');
         $this->template->footer = View::factory('front/footer');
     }
 

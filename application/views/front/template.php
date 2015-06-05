@@ -14,8 +14,11 @@
     <link href="<?=URL::base();?>css/front/animate.css" rel="stylesheet">
     <link href="<?=URL::base();?>css/front/main.css" rel="stylesheet">
     <link href="<?=URL::base();?>css/front/responsive.css" rel="stylesheet">
+    <link href="<?=URL::base();?>css/front/jquery.jgrowl.css" rel="stylesheet">
 
     <script src="<?=URL::base();?>js/jquery-1.11.2.min.js"></script>
+    <script src="<?=URL::base();?>js/front/jquery-migrate-1.0.0.js"></script>
+    <script src="<?=URL::base();?>js/front/jquery.jgrowl_minimized.js"></script>
 
 
     <!--[if lt IE 9]>
@@ -55,6 +58,29 @@
     <script src="<?=URL::base();?>js/front/price-range.js"></script>
     <script src="<?=URL::base();?>js/front/jquery.prettyPhoto.js"></script>
     <script src="<?=URL::base();?>js/front/main.js"></script>
+
+
+        <script>
+            $.jGrowl.defaults.closer = false;
+
+            // interval for checking the status popup
+            $.jGrowl.defaults.check = 500;
+
+            <? if(isset($info)): ?>
+                $.jGrowl('<div style="color: #0088ff"><?=$info?></div>', { theme: 'Right', life: 5000 });
+            <? endif; ?>
+
+            <? if(isset($error)): ?>
+                $.jGrowl('<div style="color: #ff0000"><?=$error?></div>', { theme: 'Right', life: 5000 });
+            <? endif; ?>
+
+            <? if(isset($success)): ?>
+                $.jGrowl('<div style="color: #00ff00"><?=$success?></div>', { theme: 'Right', life: 5000 });
+            <? endif; ?>
+        </script>
+
+
+
 
 </body>
 </html>

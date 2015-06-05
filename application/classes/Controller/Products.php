@@ -23,16 +23,18 @@ class Controller_Products extends Controller_Base {
         if($brand && $cat) {
             $data = $this->build_pagination($targetpage, $page, $brand, $cat);
             $this->template->title = $this->brands->get_brand_info($brand, $this->lang)['name'].'/'.$this->category->get_cat_info($cat, $this->lang)['name'];
+            $data['image'] = $this->category->get_cat_info($cat, $this->lang)['image'];
         } else
             if($brand) {
                 $data = $this->build_pagination($targetpage, $page, $brand);
                 $this->template->title = $this->brands->get_brand_info($brand, $this->lang)['name'];
+                $data['image'] = $this->brands->get_brand_info($brand, $this->lang)['image'];
             } else {
             $data = $this->build_pagination($targetpage, $page);
                 $this->template->title = 'Products';
         }
 
-        $data['title'] = $this->category->get_cat_info($cat, $this->lang)['name'];
+        $data['title'] = $this->template->title;
 //        $data['categories'] = $this->category->get_cat($this->lang);
         $data['categories'] = Controller_Menu::build_menu($this->lang);
         $data['brands'] = $this->brands->get_brands($this->lang);
@@ -41,7 +43,6 @@ class Controller_Products extends Controller_Base {
 
         $this->template->left_sidebar = View::factory('front/left_block', $data);
         $this->template->content = View::factory('front/products', $data);
-        $this->template->title = $data['title'];
     }
 
     public function build_pagination($targetpage, $page = FALSE, $brand = FALSE, $category = FALSE)
